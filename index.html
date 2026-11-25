@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Preguntas · Jornada Ganadera</title>
+<meta name="theme-color" content="#2f5d34">
+<style>
+:root{--azul:#1d3a8a;--celeste:#2f86c8;--rojo:#dc2626;--fondo:#f4f6fa;--tinta:#18233f;--gris:#5f6b7a;--verde:#3f8f2f}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--fondo);color:var(--tinta);font-size:18px;line-height:1.4}
+.franja{height:6px;background:linear-gradient(90deg,var(--rojo) 0 55%,var(--azul) 55% 100%)}
+.inst{display:flex;align-items:center;gap:12px;background:#fff;padding:10px 16px}
+.inst img{height:48px;width:auto}
+.inst span{font-size:13px;line-height:1.25;color:#3b3f46;font-weight:600}
+.hero{height:170px;background:#6d8f4a url(vacas.jpg) center 35%/cover no-repeat}
+.titulo{background:#fff;margin:-34px 14px 0;position:relative;border-radius:14px;padding:16px 16px 18px;box-shadow:0 6px 18px rgba(20,40,90,.15);text-align:center}
+.pill{display:inline-block;color:#fff;font-weight:900;font-style:italic;text-transform:uppercase;border-radius:999px;padding:4px 16px;letter-spacing:.01em}
+.pill.azul{background:var(--azul);font-size:15px}
+.pill.rojo{background:var(--rojo);font-size:19px;margin-top:10px}
+.titulo h1{margin:8px 0 0;color:var(--azul);font-size:23px;line-height:1.1;font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.01em}
+.intro{text-align:center;margin:22px 0 4px}
+.intro h2{margin:0;font-size:22px;color:var(--azul)}
+.intro p{margin:4px 0 0;color:var(--gris);font-size:16px}
+main{padding:0 18px 30px;max-width:520px;margin:0 auto}
+label.t{display:block;font-weight:700;margin:18px 0 8px}
+select,textarea,input{width:100%;font:inherit;padding:12px 14px;border:2px solid #d3d9e6;border-radius:12px;background:#fff;color:inherit}
+select:focus,textarea:focus,input:focus{outline:none;border-color:var(--celeste)}
+textarea{min-height:90px;resize:vertical}
+.grabar{display:flex;flex-direction:column;align-items:center;gap:10px;margin:22px 0 6px}
+#btnRec{width:160px;height:160px;border-radius:50%;border:6px solid #fff;background:var(--azul);color:#fff;font-size:19px;font-weight:700;box-shadow:0 0 0 3px var(--azul),0 8px 20px rgba(20,40,90,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer}
+#btnRec .ico{font-size:50px;line-height:1}
+#btnRec.on{background:var(--rojo);box-shadow:0 0 0 3px var(--rojo),0 8px 20px rgba(160,20,20,.3);animation:lat 1.2s infinite}
+@keyframes lat{50%{transform:scale(1.05)}}
+#tiempo{font-variant-numeric:tabular-nums;color:var(--gris);min-height:1.4em;text-align:center}
+.audio-ok{display:none;align-items:center;gap:8px;background:#fff;border:2px solid #bcd3ee;border-radius:12px;padding:8px 10px;margin-top:6px}
+.audio-ok audio{flex:1;height:40px;min-width:0}
+.audio-ok button{border:none;background:none;font-size:24px;cursor:pointer}
+.o{text-align:center;color:var(--gris);margin:16px 0 0}
+details{margin-top:18px}
+summary{color:var(--azul);font-weight:700;cursor:pointer}
+details input{margin-top:10px}
+#btnEnviar{width:100%;margin-top:24px;padding:16px;border:none;border-radius:999px;background:var(--rojo);color:#fff;font:inherit;font-weight:900;font-style:italic;text-transform:uppercase;font-size:20px;cursor:pointer;box-shadow:0 6px 16px rgba(160,20,20,.25)}
+#btnEnviar:disabled{opacity:.5}
+.msg{margin-top:18px;padding:14px 16px;border-radius:12px;display:none}
+.msg.ok{display:block;background:#e3f1dc;border:2px solid #9cc98a}
+.msg.esp{display:block;background:#fff4d6;border:2px solid #e6c46a}
+.msg.err{display:block;background:#fde2e2;border:2px solid #ef9a9a}
+#cola{font-size:14px;color:var(--gris);margin-top:12px;text-align:center}
+footer{background:#fff;padding:22px 16px 0;text-align:center;border-top:6px solid var(--azul)}
+.tel{display:flex;align-items:center;gap:12px;max-width:420px;margin:0 auto;background:var(--azul);color:#fff;text-decoration:none;border-radius:16px;padding:12px 16px;text-align:left}
+.tel .i{flex:none;width:38px;height:38px;border-radius:50%;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-style:italic;font-size:20px;font-family:Georgia,serif}
+.tel small{display:block;font-size:13px;font-weight:700;text-transform:uppercase;opacity:.9}
+.tel b{font-size:23px;font-style:italic;letter-spacing:.01em}
+.et{display:inline-block;margin:22px 0 10px;background:var(--rojo);color:#fff;font-weight:900;font-style:italic;text-transform:uppercase;font-size:14px;border-radius:999px;padding:3px 16px}
+.org img{height:56px;width:auto}
+.sponsors{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:420px;margin:0 auto}
+.sponsors img{width:100%;height:auto;border-radius:10px}
+.nota{font-size:13px;color:var(--gris);margin:18px 0 10px}
+.pasto{margin:0 -16px;height:30px;background:url(pasto.jpg) center bottom/auto 100% repeat-x}
+</style>
+</head>
+<body>
+<header>
+  <div class="franja"></div>
+  <div class="inst"><img src="inta70.jpg" alt="INTA 70 años" width="90" height="48"><span>Instituto Nacional de<br>Tecnología Agropecuaria</span></div>
+  <div class="hero" role="img" aria-label="Rodeo en pastura"></div>
+  <div class="titulo">
+    <span class="pill azul">Jornada Ganadera:</span>
+    <h1>Alimentación animal: pasturas megatérmicas y feedlot ecológico</h1>
+    <span class="pill rojo">Más carne a pasto</span>
+  </div>
+</header>
+<main>
+  <div class="intro"><h2>¿Tenés una pregunta?</h2><p>Grabala o escribila. La respondemos en cada parada.</p></div>
+  <label class="t" for="parada">¿Para qué parada o charla es tu pregunta?</label>
+  <select id="parada"></select>
+
+  <div class="grabar">
+    <button id="btnRec" type="button" aria-label="Grabar pregunta">
+      <span class="ico">🎤</span><span id="recTxt">Tocá y hablá</span>
+    </button>
+    <div id="tiempo"></div>
+  </div>
+  <div class="audio-ok" id="audioOk">
+    <audio id="player" controls preload="metadata"></audio>
+    <button type="button" id="btnBorrar" aria-label="Borrar audio">🗑️</button>
+  </div>
+
+  <p class="o">o escribila</p>
+  <textarea id="texto" placeholder="Escribí tu pregunta acá…" maxlength="2000"></textarea>
+
+  <details>
+    <summary>Dejar mis datos para que me respondan después (opcional)</summary>
+    <input id="nombre" placeholder="Nombre" autocomplete="name" maxlength="80">
+    <input id="telefono" placeholder="Teléfono / WhatsApp" inputmode="tel" autocomplete="tel" maxlength="40">
+  </details>
+
+  <button id="btnEnviar" type="button">Enviar pregunta</button>
+  <div id="msg" class="msg" role="status"></div>
+  <div id="cola"></div>
+</main>
+<footer>
+  <a class="tel" href="tel:+543794264305"><span class="i">i</span><span><small>Informes e inscripción</small><b>Tel. 3794 264305</b></span></a>
+  <div><span class="et">Organiza</span></div>
+  <div class="org"><img src="inta70.jpg" alt="INTA 70 años" width="105" height="56"></div>
+  <div><span class="et">Auspician</span></div>
+  <div class="sponsors">
+    <img src="sp_taragui.jpg" alt="Taragüí" loading="lazy" width="220" height="220">
+    <img src="sp_c.jpg" alt="Auspiciante" loading="lazy" width="220" height="229">
+    <img src="sp_op.jpg" alt="Peman" loading="lazy" width="220" height="216">
+    <img src="sp_toxi.jpg" alt="Auspiciante" loading="lazy" width="220" height="229">
+    <img src="sp_gentos.jpg" alt="Gentos" loading="lazy" width="220" height="204">
+    <img src="sp_agro.jpg" alt="Agropecuaria del Paraná S.A." loading="lazy" width="220" height="208">
+  </div>
+  <p class="nota">No hace falta registrarse. Si no hay señal, tu pregunta se guarda y se envía sola.</p>
+  <div class="pasto"></div>
+</footer>
+
+<script>
+/* ======== CONFIGURACIÓN: editar solo esto ======== */
+const CONFIG = {
+  ENDPOINT: 'https://script.google.com/macros/s/AKfycbzL9CEwfF9HzXHi59U_Z6poVkd_3ozKxJtNWWjBGRc9oqTt_eLrMKlFNfd4lR3b0KnX/exec',
+  EVENTO: 'Jornada Ganadera · Más carne a pasto',
+  MAX_SEG: 120,                     // duración máxima de cada audio
+  PARADAS: [
+    { id: '1', grupo: 'Recorrida a campo', nombre: 'Parada 1 · Recría de toritos y vaquillas' },
+    { id: '2', grupo: 'Recorrida a campo', nombre: 'Parada 2 · Pasturas agámicas (Nilo y Tangola)' },
+    { id: '3', grupo: 'Recorrida a campo', nombre: 'Parada 3 · Pasturas megatérmicas de 500 kg de carne' },
+    { id: '4', grupo: 'Charlas en el salón', nombre: 'Charla · Feedlot ecológico (Vittone)' },
+    { id: '5', grupo: 'Charlas en el salón', nombre: 'Charla · Control de garrapata (Rossner)' },
+    { id: '6', grupo: 'Charlas en el salón', nombre: 'Charla · Materiales forrajeros (Parodi)' },
+    { id: '7', grupo: 'Charlas en el salón', nombre: 'Charla · Suelos (Rey Montoya)' },
+    { id: '8', grupo: 'Charlas en el salón', nombre: 'Charla · La ganadería del NEA (Bendersky)' },
+    { id: '9', grupo: 'Otra', nombre: 'Otra / pregunta general' }
+  ]
+};
+/* ================================================== */
+
+const $ = id => document.getElementById(id);
+document.title = 'Preguntas · ' + CONFIG.EVENTO;
+
+// --- Paradas (la del QR viene en ?p=N) ---
+const sel = $('parada');
+const pQR = new URLSearchParams(location.search).get('p');
+sel.add(new Option('Elegí parada o charla…', ''));
+const grupos = {};
+CONFIG.PARADAS.forEach(p => {
+  const g = p.grupo || '';
+  if (g && !grupos[g]) { grupos[g] = document.createElement('optgroup'); grupos[g].label = g; sel.appendChild(grupos[g]); }
+  (g ? grupos[g] : sel).appendChild(new Option(p.nombre, p.id));
+});
+if (pQR && CONFIG.PARADAS.some(p => p.id === pQR)) sel.value = pQR;
+const nombreParada = id => (CONFIG.PARADAS.find(p => p.id === id) || {}).nombre || ('Parada ' + id);
+
+// --- Grabación en WAV 16 kHz mono (funciona en Android y iPhone, y Gemini lo lee) ---
+let rec = null, audioB64 = null, audioSeg = 0, urlPrev = null;
+
+$('btnRec').addEventListener('click', () => rec ? detener() : iniciar());
+$('btnBorrar').addEventListener('click', borrarAudio);
+
+async function iniciar() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    return aviso('err', 'Este celular no permite grabar desde la página. Escribí la pregunta abajo.');
+  }
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  const ctx = new Ctx();               // se crea dentro del toque (necesario en iPhone)
+  ctx.resume();
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } });
+  } catch (e) {
+    ctx.close();
+    return aviso('err', 'No pudimos usar el micrófono. Tocá “Permitir” cuando el celular lo pida, o escribí la pregunta abajo.');
+  }
+  await ctx.resume();
+  const src = ctx.createMediaStreamSource(stream);
+  const proc = ctx.createScriptProcessor(4096, 1, 1);
+  const chunks = [];
+  proc.onaudioprocess = e => chunks.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+  src.connect(proc); proc.connect(ctx.destination);
+  const t0 = Date.now();
+  const timer = setInterval(() => {
+    const s = Math.floor((Date.now() - t0) / 1000);
+    $('tiempo').textContent = '● Grabando ' + fmt(s) + '  ·  tocá para terminar';
+    if (s >= CONFIG.MAX_SEG) detener();
+  }, 250);
+  rec = { ctx, src, proc, stream, chunks, timer };
+  borrarAudio(true);
+  $('btnRec').classList.add('on');
+  $('recTxt').textContent = 'Tocá para terminar';
+  ocultarAviso();
+}
+
+function detener() {
+  if (!rec) return;
+  const { ctx, src, proc, stream, chunks, timer } = rec;
+  rec = null;
+  clearInterval(timer);
+  try { proc.disconnect(); src.disconnect(); } catch (e) {}
+  stream.getTracks().forEach(t => t.stop());
+  const rate = ctx.sampleRate;
+  ctx.close();
+  $('btnRec').classList.remove('on');
+  $('recTxt').textContent = 'Grabar de nuevo';
+
+  const len = chunks.reduce((a, c) => a + c.length, 0);
+  const seg = len / rate;
+  if (seg < 1) { $('tiempo').textContent = 'Muy corto. Tocá de nuevo y hablá un poco más.'; return; }
+  const all = new Float32Array(len);
+  let o = 0; for (const c of chunks) { all.set(c, o); o += c.length; }
+  const pcm = normalizar(bajarMuestreo(all, rate, 16000));
+  const wav = wavDesde(pcm, 16000);
+  audioB64 = abABase64(wav);
+  audioSeg = Math.round(seg);
+  if (urlPrev) URL.revokeObjectURL(urlPrev);
+  urlPrev = URL.createObjectURL(new Blob([wav], { type: 'audio/wav' }));
+  $('player').src = urlPrev;
+  $('audioOk').style.display = 'flex';
+  $('tiempo').textContent = '✔ Audio de ' + fmt(audioSeg) + ' listo para enviar';
+}
+
+function borrarAudio(silencioso) {
+  audioB64 = null; audioSeg = 0;
+  $('audioOk').style.display = 'none';
+  $('player').removeAttribute('src');
+  if (silencioso !== true) { $('tiempo').textContent = ''; $('recTxt').textContent = 'Tocá y hablá'; }
+}
+
+function bajarMuestreo(buf, de, a) {
+  if (a >= de) return buf;
+  const r = de / a, n = Math.floor(buf.length / r), out = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const ini = Math.floor(i * r), fin = Math.min(Math.floor((i + 1) * r), buf.length);
+    let s = 0; for (let j = ini; j < fin; j++) s += buf[j];
+    out[i] = fin > ini ? s / (fin - ini) : 0;
+  }
+  return out;
+}
+function normalizar(b) {           // sube el volumen si el productor habló lejos del celular
+  let pico = 0; for (let i = 0; i < b.length; i++) pico = Math.max(pico, Math.abs(b[i]));
+  if (pico > 0 && pico < 0.5) { const g = Math.min(0.9 / pico, 8); for (let i = 0; i < b.length; i++) b[i] *= g; }
+  return b;
+}
+function wavDesde(pcm, rate) {
+  const buf = new ArrayBuffer(44 + pcm.length * 2), v = new DataView(buf);
+  const w = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+  w(0, 'RIFF'); v.setUint32(4, 36 + pcm.length * 2, true); w(8, 'WAVE'); w(12, 'fmt ');
+  v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+  v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true);
+  w(36, 'data'); v.setUint32(40, pcm.length * 2, true);
+  for (let i = 0, o = 44; i < pcm.length; i++, o += 2) {
+    const s = Math.max(-1, Math.min(1, pcm[i])); v.setInt16(o, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+  }
+  return buf;
+}
+function abABase64(buf) {
+  const b = new Uint8Array(buf); let s = '';
+  for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000));
+  return btoa(s);
+}
+const fmt = s => Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+
+// --- Cola local: si no hay señal, la pregunta queda guardada y se envía sola ---
+const memoria = [];
+let dbP = null;
+function db() {
+  if (!dbP) dbP = new Promise((res, rej) => {
+    const r = indexedDB.open('jornada-preguntas', 1);
+    r.onupgradeneeded = () => r.result.createObjectStore('cola', { keyPath: 'id' });
+    r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+  });
+  return dbP;
+}
+async function op(modo, fn) {
+  const d = await db();
+  return new Promise((res, rej) => {
+    const tx = d.transaction('cola', modo), r = fn(tx.objectStore('cola'));
+    tx.oncomplete = () => res(r && r.result); tx.onerror = () => rej(tx.error);
+  });
+}
+async function colaPoner(it) { try { await op('readwrite', s => s.put(it)); } catch (e) { memoria.push(it); } }
+async function colaBorrar(id) {
+  try { await op('readwrite', s => s.delete(id)); } catch (e) {}
+  const i = memoria.findIndex(x => x.id === id); if (i >= 0) memoria.splice(i, 1);
+}
+async function colaTodos() {
+  let a = []; try { a = await op('readonly', s => s.getAll()) || []; } catch (e) {}
+  return a.concat(memoria.filter(m => !a.some(x => x.id === m.id)));
+}
+
+let enviando = false;
+async function enviarCola() {
+  if (enviando || !CONFIG.ENDPOINT.startsWith('https://')) return;
+  enviando = true;
+  try {
+    for (const it of await colaTodos()) {
+      try {
+        const r = await fetch(CONFIG.ENDPOINT, { method: 'POST', body: JSON.stringify(it) }); // text/plain: sin preflight CORS
+        const j = await r.json();
+        if (j.ok || j.permanente) await colaBorrar(it.id);
+      } catch (e) { break; }  // sin señal: se reintenta después
+    }
+  } finally { enviando = false; await mostrarCola(); }
+}
+async function mostrarCola() {
+  const n = (await colaTodos()).length;
+  $('cola').textContent = n ? '📶 ' + n + (n === 1 ? ' pregunta guardada' : ' preguntas guardadas') + ' en tu celular, se envían solas cuando haya señal.' : '';
+  return n;
+}
+window.addEventListener('online', enviarCola);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) enviarCola(); });
+setInterval(enviarCola, 20000);
+enviarCola();
+
+// --- Envío ---
+$('btnEnviar').addEventListener('click', async () => {
+  if (rec) detener();
+  const parada = sel.value, texto = $('texto').value.trim();
+  if (!parada) { sel.focus(); return aviso('err', 'Elegí para qué parada o charla es la pregunta.'); }
+  if (!audioB64 && !texto) return aviso('err', 'Grabá un audio o escribí tu pregunta.');
+  if (!CONFIG.ENDPOINT.startsWith('https://')) return aviso('err', 'Falta configurar el ENDPOINT en la página.');
+  const id = (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2));
+  const item = {
+    id, ts: new Date().toISOString(), parada, paradaNombre: nombreParada(parada), texto,
+    nombre: $('nombre').value.trim(), telefono: $('telefono').value.trim(),
+    audio: audioB64, mime: 'audio/wav', seg: audioSeg
+  };
+  $('btnEnviar').disabled = true;
+  aviso('esp', 'Enviando…');
+  await colaPoner(item);
+  borrarAudio(); $('texto').value = '';
+  await enviarCola();
+  const pendiente = (await colaTodos()).some(x => x.id === id);
+  $('btnEnviar').disabled = false;
+  if (pendiente) aviso('esp', 'Sin señal ahora. Tu pregunta quedó guardada en el celular y se envía sola apenas haya señal. Podés hacer otra.');
+  else aviso('ok', '¡Gracias! Tu pregunta llegó. La respondemos en ' + item.paradaNombre + '. Podés hacer otra cuando quieras.');
+});
+
+function aviso(tipo, txt) { const m = $('msg'); m.className = 'msg ' + tipo; m.textContent = txt; }
+function ocultarAviso() { $('msg').className = 'msg'; }
+</script>
+</body>
+</html>
